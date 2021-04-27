@@ -1,65 +1,121 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import React from 'react';
+import { Button, Typography, Divider, Row, Col, Layout, notification, Slider, Modal, Rate, Input, Form } from 'antd';
+
+const { Title } = Typography;
+const { Header, Footer, Sider, Content } = Layout
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+    <Layout className="w-screen h-screen">
+      <SideBar />
+      <Layout className="flex flex-col h-full">
+        <Header className="text-6xl font-extrabold text-center h-auto p-4 text-white">Hello World</Header>
+        <Content className="flex-grow m-2">
+          <Grid />
+        </Content>
+        <Footer><NotificationOpener /></Footer>
+      </Layout>
+    </Layout>
   )
+}
+
+function SideBar() {
+  const [state, open, close] = useOpenClose(false)
+  const [title, setTitle] = React.useState('Hello World')
+
+  return (
+    <Sider className="w-56" collapsible>
+      <div className="p-2">
+        <Button type='primary' className="" onClick={open}>Hello</Button>
+        <Divider className="border-gray-500" />
+        <label htmlFor="title" className="text-white text-lg p-1">Title:</label>
+        <Input id="title" className="bg-opacity-0 bg-white text-white" value={title} onChange={(e) => setTitle(e.target.value)}></Input>
+        <Modal title={title} visible={state} onOk={close} onCancel={close}>
+          <Rate />
+        </Modal>
+      </div>
+    </Sider>
+  )
+}
+
+function NotificationOpener() {
+  const [count, increaseCount] = useCounter(1)
+  const [duration, onChange] = React.useState(1)
+
+  function openNotification() {
+    notification.open({
+      message: 'Notification Counter',
+      description: `Hello World! You have clicked the button ${count} times`,
+      duration: duration
+    });
+
+    increaseCount()
+  }
+
+  return (
+    <>
+      <Button onClick={openNotification}>Open Notification</Button>
+      <Slider value={duration} onChange={(e) => onChange(e)} min={0} max={15}></Slider>
+    </>
+  )
+}
+
+function Grid(props) {
+  return (
+    <>
+      <Row gutter={[5,5]}>
+        <Col span={ 5 }>
+          <div className="bg-blue-500">Hello Grid</div>
+        </Col>
+        <Col span={ 5 }>
+          <div className="bg-blue-500">Hello Grid</div>
+        </Col>
+        <Col span={ 5 }>
+          <div className="bg-blue-500">Hello Grid</div>
+        </Col>
+        <Col span={ 5 }>
+          <div className="bg-blue-500">Hello Grid</div>
+        </Col>
+        <Col span={ 5 }>
+          <div className="bg-blue-500">Hello Grid</div>
+        </Col>
+        <Col span={ 5 }>
+          <div className="bg-blue-500">Hello Grid</div>
+        </Col>
+        <Col span={ 5 }>
+          <div className="bg-blue-500">Hello Grid</div>
+        </Col>
+        <Col span={ 5 }>
+          <div className="bg-blue-500">Hello Grid</div>
+        </Col>
+        <Col span={ 5 }>
+          <div className="bg-blue-500">Hello Grid</div>
+        </Col>
+      </Row>
+    </>
+  )
+}
+
+function useCounter(start) {
+  const [count, setCount] = React.useState(start);
+
+  function increase() {
+    setCount(count + 1)
+  }
+
+  return [count, increase]
+}
+
+function useOpenClose(start) {
+  const [state, setState] = React.useState(start);
+
+  function open() {
+    setState(true)
+  }
+
+  function close() {
+    setState(false)
+  }
+
+  return [state, open, close]
 }
