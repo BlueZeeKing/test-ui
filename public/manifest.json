@@ -1,6 +1,6 @@
 {
-    "name": "Dev'Coffee",
-    "short_name": "DevCoffee",
+    "name": "UI Test",
+    "short_name": "UI",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#fdfdfd",

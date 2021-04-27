@@ -1,7 +1,10 @@
-const withOffline = require('next-offline')
+const withWorkbox = require("next-with-workbox");
 
-const nextConfig = {
-    /* config */
-}
-
-module.exports = withOffline(nextConfig)
+module.exports = withWorkbox({
+    workbox: {
+        dest: "public",
+        swDest: "sw.js",
+        swSrc: "worker.js",
+        force: true,
+    },
+});

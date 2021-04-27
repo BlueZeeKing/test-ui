@@ -1,7 +1,23 @@
 import '../styles/globals.css'
 import Head from "next/head"
 
+import React, { useEffect } from "react";
+import { Workbox } from "workbox-window";
+
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    if (
+      !("serviceWorker" in navigator) ||
+      process.env.NODE_ENV !== "production"
+    ) {
+      console.warn("Pwa support is disabled");
+      return;
+    }
+
+    const wb = new Workbox("sw.js", { scope: "/" });
+    wb.register();
+  });
+  
   return (
     <>
       <Head>
