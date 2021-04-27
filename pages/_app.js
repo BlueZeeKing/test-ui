@@ -17,6 +17,19 @@ function MyApp({ Component, pageProps }) {
     const wb = new Workbox("sw.js", { scope: "/" });
     wb.register();
   });
+
+  useEffect(() => {
+    function change() {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    
+    window.addEventListener('resize', change)
+
+    return () => {
+      window.removeEventListener('resize', change)
+    }
+  })
   
   return (
     <>

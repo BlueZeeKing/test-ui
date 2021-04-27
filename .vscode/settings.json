@@ -1,0 +1,12 @@
+{
+    "python.languageServer": "Pylance",
+    "python.linting.pylintEnabled": false,
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportMissingModuleSource": "none"
+    },
+    "python.analysis.extraPaths": [
+        null,
+        "/Users/braydenzee/.vscode/extensions/joedevivo.vscode-circuitpython-0.1.11/stubs",
+        "/Users/braydenzee/Library/Application Support/Code/User/globalStorage/joedevivo.vscode-circuitpython/bundle/20210427/adafruit-circuitpython-bundle-py-20210427/lib"
+    ]
+}

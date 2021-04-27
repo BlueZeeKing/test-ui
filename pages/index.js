@@ -6,11 +6,11 @@ const { Header, Footer, Sider, Content } = Layout
 
 export default function Home() {
   return (
-    <Layout className="w-screen h-screen">
+    <Layout className="w-screen h-screen overflow-hidden">
       <SideBar />
-      <Layout className="flex flex-col h-full">
+      <Layout className="flex flex-col h-full overflow-hidden">
         <Header className="text-6xl font-extrabold text-center h-auto p-4 text-white">Hello World</Header>
-        <Content className="flex-grow m-2">
+        <Content className="flex-grow m-2 overflow-x-hidden">
           <Grid />
         </Content>
         <Footer><NotificationOpener /></Footer>
